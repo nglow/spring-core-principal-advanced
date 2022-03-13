@@ -8,7 +8,9 @@ import hello.proxy.config.v1_proxy.concrete_proxy.OrderRepositoryConcreteProxy;
 import hello.proxy.config.v1_proxy.concrete_proxy.OrderServiceConcreteProxy;
 import hello.proxy.trace.logtrace.LogTrace;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class ConcreteProxyConfig {
 
     @Bean
