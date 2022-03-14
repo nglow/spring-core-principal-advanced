@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import java.lang.reflect.Proxy;
 
 @Configuration
-public class DynamicProxyBasicConfig {
+public class DynamicProxyFilterConfig {
+
+    public static final String[] PATTERN = {"request*", "order*", "save*"};
 
     @Bean
     public OrderRepositoryV1 orderRepository(LogTrace logTrace) {
@@ -16,7 +18,7 @@ public class DynamicProxyBasicConfig {
 
         return (OrderRepositoryV1) Proxy.newProxyInstance(OrderRepositoryV1.class.getClassLoader(),
                 new Class[]{OrderRepositoryV1.class},
-                new LogTraceBasicHandler(orderRepositoryV1, logTrace));
+                new LogTraceFilterHandler(orderRepositoryV1, logTrace, PATTERN));
     }
 
     @Bean
@@ -25,7 +27,7 @@ public class DynamicProxyBasicConfig {
 
         return (OrderServiceV1) Proxy.newProxyInstance(OrderServiceV1.class.getClassLoader(),
                 new Class[]{OrderServiceV1.class},
-                new LogTraceBasicHandler(orderServiceV1, logTrace));
+                new LogTraceFilterHandler(orderServiceV1, logTrace, PATTERN));
     }
 
     @Bean
@@ -34,6 +36,6 @@ public class DynamicProxyBasicConfig {
 
         return (OrderControllerV1) Proxy.newProxyInstance(OrderControllerV1.class.getClassLoader(),
                 new Class[]{OrderControllerV1.class},
-                new LogTraceBasicHandler(orderControllerV1, logTrace));
+                new LogTraceFilterHandler(orderControllerV1, logTrace, PATTERN));
     }
 }
