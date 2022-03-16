@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
 @Slf4j
-public class AspectV4 {
+public class AspectV4Pointcut {
 
     @Around("hello.aop.order.aop.PointCuts.allOrder()")
     public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable {
